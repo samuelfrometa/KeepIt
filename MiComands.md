@@ -12,5 +12,6 @@ uv venv
 
 RUTAS WEB IMPORTANTES 
 http://127.0.0.1:8000/docs
+http://127.0.0.1:8000/redoc
 
 npx create-expo-app@latest --template blank frontend

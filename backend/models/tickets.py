@@ -2,6 +2,7 @@ from pydantic import BaseModel, Field
 from datetime import date
 
 class Tickets(BaseModel):
+    id: int
     name: str = Field(..., description="Ticket name")
     category: str = Field(..., example="Electrónica")
     image: str | None = Field(None, description="Image of the ticket")
