@@ -1,18 +1,11 @@
 from fastapi import FastAPI
-from fastapi.staticfiles import StaticFiles
-
-from database.db import engine, Base
-from routes import auth, tasks
-
-Base.metadata.create_all(bind=engine)
+from routes import tickets
 
 app = FastAPI()
 
-app.mount(
-    "/static",
-    StaticFiles(directory="web/static"),
-    name="static",
-)
+app.include_router(tickets, prefix='/tickets')
 
-app.include_router(auth.router)
-app.include_router(tasks.router)
+app.include_router()
+@app.get('/')
+async def read_root(tickets):
+    return {"message":"Hola Mundo"}
