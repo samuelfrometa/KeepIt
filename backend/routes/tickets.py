@@ -6,12 +6,12 @@ tickets_router = APIRouter()
 # Base de datos en memoria
 memory_db = {"tickets": []}
 
-# GET todos los tickets
+# Funcion get del routes para listar los tickets
 @tickets_router.get("/")
 async def get_tickets():
     return memory_db["tickets"]
 
-# GET ticket por id
+# Funcion get para conseguir los tickets por id
 @tickets_router.get("/{ticket_id}")
 async def get_ticket(ticket_id: int):
     for ticket in memory_db["tickets"]:
@@ -27,7 +27,7 @@ async def create_ticket(ticket: Tickets):
         if t["id"] == ticket.id:
             raise HTTPException(status_code=400, detail="Ticket already exists")
 
-    memory_db["tickets"].append(ticket.dict())
+    memory_db["tickets"].append(ticket.model_dump())
     return ticket
 
 
@@ -36,7 +36,7 @@ async def create_ticket(ticket: Tickets):
 async def update_ticket(ticket_id: int, ticket: Tickets):
     for index, t in enumerate(memory_db["tickets"]):
         if t["id"] == ticket_id:
-            updated = ticket.dict()
+            updated = ticket.model_dump()
             updated["id"] = ticket_id
             memory_db["tickets"][index] = updated
             return updated

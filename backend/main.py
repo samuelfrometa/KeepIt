@@ -8,10 +8,6 @@ app = FastAPI()
 
 app.include_router(tickets_router, prefix="/tickets")
 
-@app.get("/")
-async def read_root():
-    return {"message": "Hola Mundo"}
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins = Config.ORIGINS,
