@@ -19,26 +19,30 @@ async def get_ticket(ticket_id: int):
             return ticket
     raise HTTPException(status_code=404, detail="Ticket not found")
 
+
 # POST crear ticket
-@tickets_router.post("/")
+@tickets_router.post("/", status_code=201)
 async def create_ticket(ticket: Tickets):
-    # comprobar si existe
     for t in memory_db["tickets"]:
         if t["id"] == ticket.id:
             raise HTTPException(status_code=400, detail="Ticket already exists")
 
-    memory_db["tickets"].append(ticket)
+    memory_db["tickets"].append(ticket.dict())
     return ticket
+
 
 # PUT actualizar ticket
 @tickets_router.put("/{ticket_id}")
 async def update_ticket(ticket_id: int, ticket: Tickets):
     for index, t in enumerate(memory_db["tickets"]):
         if t["id"] == ticket_id:
-            memory_db["tickets"][index] = ticket
-            return ticket
+            updated = ticket.dict()
+            updated["id"] = ticket_id
+            memory_db["tickets"][index] = updated
+            return updated
 
     raise HTTPException(status_code=404, detail="Ticket not found")
+
 
 # DELETE eliminar ticket
 @tickets_router.delete("/{ticket_id}")

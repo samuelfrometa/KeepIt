@@ -5,5 +5,5 @@ load_dotenv()
 
 class Config:
     ORIGINS = [
-        "http://localhost:3000"
+        "http://localhost:5173"
     ]
