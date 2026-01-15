@@ -4,7 +4,29 @@ from models.tickets import Tickets
 tickets_router = APIRouter()
 
 # Base de datos en memoria
-memory_db = {"tickets": []}
+memory_db = {
+    "tickets": [
+        {
+            "id": 1,
+            "title": "Garantía móvil Samsung",
+            "description": "Pantalla con fallo intermitente",
+            "status": "open"
+        },
+        {
+            "id": 2,
+            "title": "Factura TV LG",
+            "description": "Problema con el sonido",
+            "status": "in_progress"
+        },
+        {
+            "id": 3,
+            "title": "Garantía portátil HP",
+            "description": "Batería no carga",
+            "status": "closed"
+        }
+    ]
+}
+
 
 # Funcion get del routes para listar los tickets
 @tickets_router.get("/")

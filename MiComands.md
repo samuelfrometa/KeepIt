@@ -15,3 +15,7 @@ http://127.0.0.1:8000/docs
 http://127.0.0.1:8000/redoc
 
 npx create-expo-app@latest --template blank frontend
+
+npm install @react-navigation/native
+npm install @react-navigation/native-stack
+npx expo install react-native-screens react-native-safe-area-context

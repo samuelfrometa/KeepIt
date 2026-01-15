@@ -24,7 +24,7 @@ function AddTicket() {
 
     try {
       await api.post("/tickets/", {
-        id: Date.now(), // id temporal (mejor usar backend)
+        id: Date.now(),
         ...ticket,
         amount: Number(ticket.amount),
         date_upload: new Date().toISOString().split("T")[0]
